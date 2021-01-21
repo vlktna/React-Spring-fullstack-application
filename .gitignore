@@ -1,0 +1,7 @@
+web_lab4.1.iml
+.gitattributes
+.idea
+target
+view/node_modules
+.DS_Store
+src/test/*

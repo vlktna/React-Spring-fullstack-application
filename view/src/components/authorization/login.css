@@ -1,0 +1,61 @@
+@media (min-width: 1025px) {
+    .login-container {
+        max-width: 40%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 10%;
+
+    }
+}
+
+@media (max-width: 1024px) {
+    .login-container {
+        margin: 5%;
+    }
+}
+
+.login-container {
+    padding: 3rem;
+}
+
+.login-element {
+    margin-bottom: 2rem;
+}
+
+.login-label {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: rgb(187, 155, 212);
+    padding-top: .75rem;
+}
+
+.login-button {
+    width: 100%;
+}
+
+.purple-text{
+    color: rgb(187, 155, 212);
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #b2b2b2;
+}

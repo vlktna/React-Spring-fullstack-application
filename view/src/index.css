@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+    background-color: #21262d;
+    color: #e2e3e4;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.label {
+    color: #b2b2b2;
+    font-size: 90%;
+    padding-bottom: .1rem;
+}
+
+
+.element {
+    padding-bottom: 2rem;
+}
+
+.button-block {
+    display: flex;
+}
+
+.button {
+    display: inline-flex;
+}
+
+@media (min-width: 1245px) {
+    .main {
+        width: 1245px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .content {
+        width: 1217px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    .form-container {
+        width: 50%;
+        padding-top: 4rem;
+    }
+    .container{
+        display: flex;
+    }
+
+    #plot {
+        width: 600px;
+        height: 600px;
+    }
+
+    .plot-container {
+        margin: 1rem;
+    }
+
+}
+
+@media (max-width: 1024px) {
+    .plot-container {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        padding-bottom: 100%;
+        vertical-align: middle;
+        overflow: hidden;
+        margin-bottom: 1rem;
+    }
+
+    #plot {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        /*padding: 2rem;*/
+    }
+}
+
+@media (max-width: 700px) {
+    .content{
+        font-size: 80%;
+    }
+    .tableHeader{
+        display: none;
+    }
+}
+
+.form-container {
+    margin: 1rem;
+}
+
+.plot-text {
+    fill: white;
+}
+
+.table-container{
+    display: block;
+    margin: 1rem;
+}
+
+header{
+    padding: .5rem 1rem;
+    margin-bottom: 1rem;
+
+}
+
+/*.content{*/
+/*    width: 1245px;*/
+/*    margin-right: auto;*/
+/*    margin-left: auto;*/
+/*}*/
+
+.header-right{
+    float: right;
+}
+
+.logout{
+    padding: .5rem 1rem;
+    margin-bottom: 1rem;
+
+}
