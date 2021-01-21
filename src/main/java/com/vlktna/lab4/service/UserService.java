@@ -18,7 +18,6 @@ public class UserService {
         this.userRepository = userRepository;
         this.encoder = encoder;
     }
-
     public User findByUsername(String name) {
         return userRepository.findByUsername(name);
     }

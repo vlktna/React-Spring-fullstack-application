@@ -14,7 +14,6 @@ public class MainController {
 
     private final PointService pointService;
     private final UserService userService;
-
     @Autowired
     public MainController(PointService pointService, UserService userService) {
         this.pointService = pointService;

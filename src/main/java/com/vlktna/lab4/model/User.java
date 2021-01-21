@@ -34,5 +34,4 @@ public class User {
     @NotEmpty
     @Column(name = "password")
     private String password;
-
 }

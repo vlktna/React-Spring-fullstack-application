@@ -43,7 +43,6 @@ public class AuthorizationController {
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-
         final String jwt = tokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(jwt);
     }

@@ -36,5 +36,4 @@ public class Point implements Serializable {
 
     @Column(name = "owner")
     private String owner;
-
 }

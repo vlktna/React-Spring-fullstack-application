@@ -16,7 +16,6 @@ public class ImplUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority("USER"));
     }
-
     @Override
     public String getPassword() {
         return user.getPassword();
