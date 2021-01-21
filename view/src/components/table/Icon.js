@@ -1,6 +1,5 @@
 import React from 'react';
 import "./table.css";
-
 export default function Icon(props) {
     return (
         <span>

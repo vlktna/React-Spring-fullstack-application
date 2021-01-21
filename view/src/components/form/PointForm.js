@@ -99,7 +99,6 @@ export default function PointForm(props) {
                 <div className="button-block">
                     <Button type="submit" style={{marginRight: "1rem"}} label="Check"
                             icon="pi pi-check" className="button"/>
-
                     <Button onClick={handleDelete} type="button" label="Clear table" icon="pi pi-trash"
                             className="p-button-secondary button"/>
                 </div>

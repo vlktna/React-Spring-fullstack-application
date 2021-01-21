@@ -10,7 +10,7 @@ import logout from "../services/UserService";
 export default function MainComponent() {
     const [data, setData] = useState([])
 
-    useEffect(() => {
+    useEffct(() => {
         getData().then(response => response.json()).then(userPoints => setData(userPoints))
     }, [])
 

@@ -14,9 +14,7 @@ class PublicRoute extends Component {
                         <Component {...props} />
                 )}
             />
-
         )
     }
 }
-
 export default PublicRoute;

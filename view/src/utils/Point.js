@@ -14,12 +14,6 @@ function calculateY(y, r) {
     return String(300.0 - y * 250.0 / r)
 }
 
-// let target = document.getElementById('target-dot')
-// target.setAttribute('r', '10')
-// target.setAttribute('cx', String(calcX))
-// target.setAttribute('cy', String(calcY))
-// target.setAttribute('fill', this.color)
-
 export function calculateColor(result) {
     return result ? '#9fdaa8' : '#f19ea6'
 }
@@ -40,15 +34,3 @@ function checkQuarterCircle(x, y, r) {
 function checkTriangle(x, y, r) {
     return (y <= Number(x + r)) && (x <= 0) && (y >= 0)
 }
-
-//
-// static update() {
-//     if (this.result) {
-//         this.r = Number(document.getElementById('form:valueR').value)
-//         this.calculateResult()
-//         this.calculateColor()
-//         this.calculateCoordinates()
-//     }
-// }
-//
-

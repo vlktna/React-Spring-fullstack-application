@@ -19,9 +19,7 @@ class App extends Component {
                     <PrivateRoute path="/login/sign-up" component={SignUp}/>
                 </Switch>
             </BrowserRouter>
-
         )
     }
 }
-
 export default App;

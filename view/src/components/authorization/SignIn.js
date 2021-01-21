@@ -105,7 +105,6 @@ export default function SignIn() {
                     <div className="login-element p-col-12">
                         <Button id="sign-in-button" type="submit" label="SIGN IN"/>
                     </div>
-
                     <div>
                         <Link className='SectionNavigation-Item Section' to="/login/sign-up">
                             <span className='Section-Title'>Don't have an account? <span

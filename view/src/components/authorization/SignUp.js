@@ -29,7 +29,6 @@ export default function SignUp() {
         toast.current.show({severity: severity, summary: summary, detail: detail, life: 3000})
     }
 
-
     const handleRegSubmit = (e) => {
         e.preventDefault()
         let isRequired = true

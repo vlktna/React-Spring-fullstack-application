@@ -1,7 +1,6 @@
 export function getCurrentTime() {
     return `${getDate()} ${getTime()}`
 }
-
 function getTime() {
     let date = new Date()
     return `${validateTime(date.getHours())}:${validateTime(date.getMinutes())}`

@@ -17,7 +17,6 @@ export default function Plot(props) {
         const valueR = document.getElementById("currentR").innerText
 
         let x, y
-
         if (window.innerWidth > 1023) {
 
             x = clientX - centerX

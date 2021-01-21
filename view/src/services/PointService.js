@@ -10,6 +10,7 @@ export function getData() {
         }
     )
 }
+
 export function sendData(x, y, r, result, time, owner) {
     console.log("sending...")
     return fetch(`${hostURL}/save`,

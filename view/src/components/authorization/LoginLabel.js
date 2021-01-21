@@ -1,6 +1,5 @@
 import React from 'react';
 import "./login.css"
-
 export default function LoginLabel(props) {
     return (
         <div className="login-label">
