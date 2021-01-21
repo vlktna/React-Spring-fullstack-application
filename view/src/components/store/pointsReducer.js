@@ -14,7 +14,6 @@ export const pointsReducer = createSlice({
         }
     }
 });
-
 export const {addPointToPointsList, updatePointsList} = pointsReducer.actions
 export const selectHistory = state => state.points.pointsList
 
