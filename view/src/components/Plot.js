@@ -1,13 +1,19 @@
 import React from "react";
 import {Card} from "primereact/card";
 import '../index.css'
-import {calculateColor, calculateResult} from "../utils/Point";
 import {sendData} from "../services/PointService";
 import {getCurrentTime} from "../utils/CurrentTime";
+import {calculateResult, createTargetDot} from "../model/Point";
 
 export default function Plot(props) {
+
+    props.data.map(dot => {
+        const valueR = document.getElementById("currentR").innerText
+        createTargetDot(dot.valueX, dot.valueY, valueR)
+    })
+
     const onClick = (e) => {
-        const target = document.getElementById("target-dot")
+
         const plot = document.getElementById("plot")
         const rect = plot.getBoundingClientRect()
         const centerX = Number(rect.left)
@@ -18,25 +24,18 @@ export default function Plot(props) {
 
         let x, y
         if (window.innerWidth > 1023) {
-
             x = clientX - centerX
             y = clientY - centerY
         } else {
             let k = 600 / window.innerWidth
-
             x = (clientX - centerX) * k
             y = (clientY - centerY) * k
-
         }
 
         const valueX = ((x - 300.) * valueR / 250.).toFixed(2)
         const valueY = ((-y + 300.) * valueR / 250.).toFixed(2)
 
-
-        target.setAttribute("cx", String(x))
-
-        target.setAttribute("cy", String(y))
-        target.setAttribute('fill', calculateColor(calculateResult(Number(valueX), Number(valueY), Number(valueR))))
+        createTargetDot(valueX, valueY, valueR)
 
         sendData(valueX, valueY, valueR, String(calculateResult(valueX, valueY, valueR)), getCurrentTime(),
             localStorage.getItem("username")).then(props.reloadTable)
@@ -76,12 +75,14 @@ export default function Plot(props) {
 
                 <text className="plot-text" x="70%" y="55%">R/2</text>
                 <text className="plot-text" x="90%" y="55%">R</text>
-
-                <circle cx="0" cy="0" fill="" id="target-dot" r="0"/>
             </svg>
         </Card>
     )
 }
-
+// const mapDispatchToProps = {
+//     createPoint
+// }
+//
+// export default connect(null, mapDispatchToProps)(Plot)
 
 

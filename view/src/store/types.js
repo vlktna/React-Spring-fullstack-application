@@ -1,0 +1,1 @@
+export const CREATE_POINT = "CREATE_POINT"

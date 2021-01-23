@@ -7,7 +7,7 @@ import {Button} from "primereact/button";
 import {Link} from "react-router-dom";
 import {login} from "../../services/UserService";
 import Header from "../Header";
-import {homepage} from "../../services/host";
+import {homepage} from "../../utils/host";
 
 export default function SignIn() {
     const toast = useRef(null);
@@ -70,7 +70,7 @@ export default function SignIn() {
                         }
                     );
                 } else {
-                    showError("Something went wrong")
+                    showError("Error", "This user doesn't seem to exist")
                     localStorage.clear();
                 }
             })

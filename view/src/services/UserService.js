@@ -1,4 +1,4 @@
-import {homepage, hostURL} from "./host";
+import {homepage, hostURL} from "../utils/host";
 
 export function createNewUser(data) {
     return fetch(`${hostURL}/registration`,

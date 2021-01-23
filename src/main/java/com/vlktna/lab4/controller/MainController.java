@@ -13,28 +13,25 @@ import java.util.List;
 public class MainController {
 
     private final PointService pointService;
-    private final UserService userService;
     @Autowired
-    public MainController(PointService pointService, UserService userService) {
+    public MainController(PointService pointService) {
         this.pointService = pointService;
-        this.userService = userService;
     }
 
-    @GetMapping("/points")
-    public List<Point> getPoints() {
-        System.out.println("points");
-        return this.pointService.getPoints();
+    @PostMapping("/points")
+    public List<Point> getPoints(@RequestBody String owner) {
+        owner = owner.substring(1, owner.length() - 1);
+        return this.pointService.getPoints(owner);
     }
 
     @DeleteMapping("/delete")
-    public void deletePoints(User user) {
-        this.pointService.deletePoints();
+    public void deletePoints(@RequestBody String owner) {
+        owner = owner.substring(1, owner.length() - 1);
+        this.pointService.deletePoints(owner);
     }
 
     @PostMapping("/save")
     public void savePoint(@RequestBody Point point) {
-        System.out.println("save>>>");
-        System.out.println(point.toString());
         this.pointService.savePoint(point);
     }
 }

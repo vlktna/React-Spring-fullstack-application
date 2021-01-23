@@ -1,22 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Dropdown} from "primereact/dropdown";
 import {Slider} from "primereact/slider";
 import {Button} from "primereact/button";
 import "../../index.css";
 import "./pointForm.css";
 import {deleteData, sendData} from "../../services/PointService";
-import {calculateResult, createTargetDot} from "../../utils/Point";
 import {getCurrentTime} from "../../utils/CurrentTime";
+import {connect} from "react-redux";
+import {calculateResult, createTargetDot, deleteTargetDot} from "../../model/Point";
+import {createPoint} from "../../store/actions";
 
-export default function PointForm(props) {
+function PointForm(props) {
     const [valueX, setValueX] = useState(0.);
     const [valueY, setValueY] = useState(0.);
     const [valueR, setValueR] = useState(1.);
-
-    useEffect(() => {
-        localStorage.setItem("valueR", "1")
-        createTargetDot(0, 0, 1)
-    }, [])
 
     const valueXSelectItems = [
         {label: '-3', value: -3.},
@@ -44,6 +41,10 @@ export default function PointForm(props) {
             localStorage.getItem("username")).then(props.reloadTable)
 
         createTargetDot(Number(valueX), Number(valueY), Number(valueR))
+        props.createPoint({
+            x: Number(valueX),
+            y: Number(valueY)
+        })
     }
 
     const handleValueXInput = (e) => {
@@ -56,9 +57,16 @@ export default function PointForm(props) {
 
     const handleValueRInput = (e) => {
         setValueR(e.target.value)
+
+        document.querySelectorAll(".target-dot").forEach(elem => {
+            updateTargetDot(elem, e.target.value)
+        })
     }
 
     const handleDelete = () => {
+        document.querySelectorAll(".target-dot").forEach(elem => {
+            deleteTargetDot(elem)
+        })
         deleteData().then(
             props.reloadTable
         )
@@ -106,3 +114,9 @@ export default function PointForm(props) {
         </form>
     )
 }
+
+const mapDispatchToProps = {
+    createPoint
+}
+
+export default connect(null, mapDispatchToProps)(PointForm)

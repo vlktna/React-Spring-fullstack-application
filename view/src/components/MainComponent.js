@@ -10,7 +10,7 @@ import logout from "../services/UserService";
 export default function MainComponent() {
     const [data, setData] = useState([])
 
-    useEffct(() => {
+    useEffect(() => {
         getData().then(response => response.json()).then(userPoints => setData(userPoints))
     }, [])
 
@@ -18,16 +18,16 @@ export default function MainComponent() {
         getData().then(response => response.json()).then(userPoints => setData(userPoints))
     }
 
-    return(
+    return (
         <div>
             <div className="p-card logout">
                 <div className="main">
-                    <Button onClick={logout} label="logout" />
+                    <Button onClick={logout} label="logout"/>
                 </div>
             </div>
             <div className="main">
                 <div className="container">
-                    <Plot reloadTable={updateData}/>
+                    <Plot data={data} reloadTable={updateData}/>
                     <PointForm reloadTable={updateData}/>
                 </div>
                 <div className="table-container">

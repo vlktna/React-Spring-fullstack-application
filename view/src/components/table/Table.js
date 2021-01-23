@@ -4,6 +4,7 @@ import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import "./table.css"
 import Icon from "./Icon";
+
 export default function Table(props) {
     return (
         <Card className="p-card" id="table">

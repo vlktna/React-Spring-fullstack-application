@@ -8,7 +8,6 @@ function getTime() {
 
 function validateTime(time) {
     if (String(time).length < 2) {
-        console.log(String(time).length)
         return `0${time}`
     } else return time
 }

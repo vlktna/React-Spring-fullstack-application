@@ -24,7 +24,7 @@ public class AuthorizationController {
 
     @Autowired
     public AuthorizationController(UserService userService, AuthenticationManager authenticationManager,
-                          ImplUserDetailsService userDetailsService, Token tokenUtil) {
+                                   ImplUserDetailsService userDetailsService, Token tokenUtil) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
@@ -37,8 +37,7 @@ public class AuthorizationController {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
             );
-        }
-        catch (BadCredentialsException e) {
+        } catch (BadCredentialsException e) {
             return new ResponseEntity<>("Wrong login or password", HttpStatus.UNAUTHORIZED);
         }
 

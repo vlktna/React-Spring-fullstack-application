@@ -10,7 +10,6 @@ import PublicRoute from "./security/PublicRoute";
 
 class App extends Component {
     render() {
-
         return (
             <BrowserRouter basename={'/~s284754'}>
                 <Switch>
@@ -22,4 +21,5 @@ class App extends Component {
         )
     }
 }
+
 export default App;
