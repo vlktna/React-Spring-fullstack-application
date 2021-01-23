@@ -9,8 +9,8 @@ import 'primeflex/primeflex.css'
 import {Router} from "react-router-dom";
 import {createBrowserHistory} from "history";
 import {compose, createStore} from "redux";
-import {rootReducer} from "./components/store/rootReducer";
 import {Provider} from "react-redux";
+import {rootReducer} from "./store/rootReducer";
 
 const history = createBrowserHistory()
 const store = createStore(rootReducer)
