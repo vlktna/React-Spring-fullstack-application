@@ -7,7 +7,7 @@ import "./pointForm.css";
 import {deleteData, sendData} from "../../services/PointService";
 import {getCurrentTime} from "../../utils/CurrentTime";
 import {connect} from "react-redux";
-import {calculateResult, createTargetDot, deleteTargetDot} from "../../model/Point";
+import {calculateResult, createTargetDot, deleteTargetDot, updateTargetDot} from "../../model/Point";
 import {createPoint} from "../../store/actions";
 
 function PointForm(props) {
@@ -47,20 +47,24 @@ function PointForm(props) {
         })
     }
 
-    const handleValueXInput = (e) => {
-        setValueX(e.target.value)
+    const handleDropdown = (e) => {
+        const targetName = e.target.id
+        const value = e.target.value
+        switch (targetName) {
+            case "valueX":
+                setValueX(value)
+                break
+            case "valueR":
+                setValueR(value)
+                document.querySelectorAll(".target-dot").forEach(elem => {
+                    updateTargetDot(elem, e.target.value)
+                })
+                break
+        }
     }
 
-    const handleValueYInput = (e) => {
+    const handleSlider = (e) => {
         setValueY(e.value)
-    }
-
-    const handleValueRInput = (e) => {
-        setValueR(e.target.value)
-
-        document.querySelectorAll(".target-dot").forEach(elem => {
-            updateTargetDot(elem, e.target.value)
-        })
     }
 
     const handleDelete = () => {
@@ -81,7 +85,7 @@ function PointForm(props) {
                         <span>X = {valueX}</span>
                     </div>
                     <label htmlFor="valueX" className="label">X in (-3, 5)</label>
-                    <Dropdown onChange={handleValueXInput} id="valueX" value={valueX}
+                    <Dropdown onChange={handleDropdown} id="valueX" value={valueX}
                               options={valueXSelectItems} placeholder="Select X"/>
                 </div>
 
@@ -90,7 +94,7 @@ function PointForm(props) {
                         <span>Y = {valueY}</span>
                     </div>
                     <label htmlFor="valueY" className="label">Y in (-3, 5)</label>
-                    <Slider onChange={handleValueYInput} id="valueY" value={valueY}
+                    <Slider onChange={handleSlider} id="valueY" value={valueY}
                             min={-3} max={5} step={1}/>
                 </div>
 
@@ -100,7 +104,7 @@ function PointForm(props) {
                         <span id="currentR">{valueR}</span>
                     </div>
                     <label htmlFor="valueR" className="label">R in (-3, 5)</label>
-                    <Dropdown onChange={handleValueRInput} id="valueR" value={valueR}
+                    <Dropdown onChange={handleDropdown} id="valueR" value={valueR}
                               options={valueRSelectItems} placeholder="Select R"/>
                 </div>
 

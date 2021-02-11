@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import {createNewUser} from "../../services/UserService";
 import Header from "../Header";
 import {Toast} from "primereact/toast";
+import {setError, showMessage, unsetError} from "./error";
 
 export default function SignUp() {
     const toast = useRef(null);
@@ -15,22 +16,7 @@ export default function SignUp() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const setError = (element) => {
-        document.getElementById(`${element}-error`).textContent = "This field is required"
-        document.getElementById(`${element}-label`).style.color = "#f19ea6"
-    }
-
-    const unsetError = (element) => {
-        document.getElementById(`${element}-error`).textContent = ""
-        document.getElementById(`${element}-label`).style.color = "rgba(255, 255, 255, 0.6)"
-    }
-
-    const showMessage = (severity, summary, detail) => {
-        toast.current.show({severity: severity, summary: summary, detail: detail, life: 3000})
-    }
-
-    const handleRegSubmit = (e) => {
-        e.preventDefault()
+    const isRequired = () => {
         let isRequired = true
 
         if (firstName === "") {
@@ -52,8 +38,13 @@ export default function SignUp() {
             setError("password")
             isRequired = false
         }
+        return isRequired
+    }
 
-        if (isRequired) {
+    const handleRegSubmit = (e) => {
+        e.preventDefault()
+
+        if (isRequired()) {
             createNewUser({
                 firstName: firstName,
                 lastName: lastName,
@@ -61,46 +52,33 @@ export default function SignUp() {
                 password: password
             }).then(res => {
                 if (res.ok) {
-                    showMessage("success", "Success", "Now you can sign in")
-
+                    showMessage(toast, "success", "Success", "Now you can sign in")
                 } else {
-                    showMessage("error", "Error", "This login is already taken")
+                    showMessage(toast, "error", "Error", "This login is already taken")
                 }
             })
         }
     }
 
-    const handleFirstNameInput = (e) => {
-        const firstName = e.target.value
-        setFirstName(firstName)
+    const handleInput = (e) => {
+        const targetName = e.target.id
+        const value = e.target.value.trim()
 
-        if (firstName !== "") {
-            unsetError("firstName")
+        switch (targetName) {
+            case "firstName":
+                setFirstName(value)
+                break
+            case "lastName":
+                setLastName(value)
+                break
+            case "username":
+                setUsername(value)
+                break
+            case "password":
+                setPassword(value)
+                break
         }
-    }
-    const handleLastNameInput = (e) => {
-        const lastName = e.target.value
-        setLastName(lastName)
-
-        if (lastName !== "") {
-            unsetError("lastName")
-        }
-    }
-    const handleUsernameInput = (e) => {
-        const username = e.target.value
-        setUsername(username)
-
-        if (username !== "") {
-            unsetError("username")
-        }
-    }
-    const handlePasswordInput = (e) => {
-        const password = e.target.value
-        setPassword(password)
-
-        if (password !== "") {
-            unsetError("password")
-        }
+        unsetError(targetName)
     }
 
     return (
@@ -114,7 +92,7 @@ export default function SignUp() {
 
                     <div className="login-element p-col-12 p-md-6">
                     <span className="p-float-label">
-                        <InputText id="firstName" value={firstName} onChange={handleFirstNameInput}/>
+                        <InputText id="firstName" value={firstName} onChange={handleInput}/>
                         <label id="firstName-label" htmlFor="firstName">First Name *</label>
                     </span>
                         <small id="firstName-error" className="p-invalid"/>
@@ -122,7 +100,7 @@ export default function SignUp() {
 
                     <div className="login-element p-col-12 p-md-6">
                     <span className="p-float-label">
-                        <InputText id="lastName" value={lastName} onChange={handleLastNameInput}/>
+                        <InputText id="lastName" value={lastName} onChange={handleInput}/>
                         <label id="lastName-label" htmlFor="lastName">Last Name *</label>
                     </span>
                         <small id="lastName-error" className="p-invalid"/>
@@ -130,7 +108,7 @@ export default function SignUp() {
 
                     <div className="login-element p-col-12">
                     <span className="p-float-label">
-                        <InputText id="username" value={username} onChange={handleUsernameInput}/>
+                        <InputText id="username" value={username} onChange={handleInput}/>
                         <label id="username-label" htmlFor="username">Login *</label>
                     </span>
                         <small id="username-error" className="p-invalid"/>
@@ -138,7 +116,7 @@ export default function SignUp() {
 
                     <div className="login-element p-col-12 ">
                     <span className="p-float-label">
-                        <InputText id="password" type="password" value={password} onChange={handlePasswordInput}/>
+                        <InputText id="password" type="password" value={password} onChange={handleInput}/>
                         <label id="password-label" htmlFor="password">Password *</label>
                     </span>
                         <small id="password-error" className="p-invalid"/>

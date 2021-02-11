@@ -8,45 +8,29 @@ import {Link} from "react-router-dom";
 import {login} from "../../services/UserService";
 import Header from "../Header";
 import {homepage} from "../../utils/host";
+import {setError, showMessage, unsetError} from "./error";
 
 export default function SignIn() {
     const toast = useRef(null);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const setError = (element) => {
-        document.getElementById(`${element}-error`).textContent = "This field is required"
-        document.getElementById(`${element}-label`).style.color = "#f19ea6"
-    }
+    const handleInput = (e) => {
+        const targetName = e.target.id
+        const value = e.target.value.trim()
 
-    const showError = (summary, detail) => {
-        toast.current.show({severity: "error", summary: summary, detail: detail, life: 3000})
-    }
-
-    const unsetError = (element) => {
-        document.getElementById(`${element}-error`).textContent = ""
-        document.getElementById(`${element}-label`).style.color = "rgba(255, 255, 255, 0.6)"
-    }
-
-    const handleUsernameInput = (e) => {
-        const username = e.target.value
-        setUsername(username)
-
-        if (username !== "") {
-            unsetError("username")
+        switch (targetName) {
+            case "username":
+                setUsername(value)
+                break
+            case "password":
+                setPassword(value)
+                break
         }
-    }
-    const handlePasswordInput = (e) => {
-        const password = e.target.value
-        setPassword(password)
-
-        if (password !== "") {
-            unsetError("password")
-        }
+        unsetError(targetName)
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const isRequired = () => {
         let isRequired = true
 
         if (username === "") {
@@ -58,10 +42,13 @@ export default function SignIn() {
             setError("password")
             isRequired = false
         }
+        return isRequired
+    }
 
-        if (isRequired) {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (isRequired()) {
             login(username, password).then(response => {
-                console.log(response)
                 if (response.ok) {
                     response.text().then(text => {
                             localStorage.setItem("auth", text);
@@ -70,7 +57,7 @@ export default function SignIn() {
                         }
                     );
                 } else {
-                    showError("Error", "This user doesn't seem to exist")
+                    showMessage(toast, "error", "Error", "This user doesn't seem to exist")
                     localStorage.clear();
                 }
             })
@@ -88,7 +75,7 @@ export default function SignIn() {
 
                     <div className="login-element p-col-12">
                     <span className="p-float-label">
-                        <InputText id="username" value={username} onChange={handleUsernameInput}/>
+                        <InputText id="username" value={username} onChange={handleInput}/>
                         <label id="username-label" htmlFor="username">Login *</label>
                     </span>
                         <small id="username-error" className="p-invalid"/>
@@ -96,7 +83,7 @@ export default function SignIn() {
 
                     <div className="login-element p-col-12 ">
                     <span className="p-float-label">
-                        <InputText id="password" type="password" value={password} onChange={handlePasswordInput}/>
+                        <InputText id="password" type="password" value={password} onChange={handleInput}/>
                         <label id="password-label" htmlFor="password">Password *</label>
                     </span>
                         <small id="password-error" className="p-invalid"/>
